@@ -6,7 +6,6 @@ if(!process.env.npm_package_config_update){
     return;
 }
 
-var cp = require('child_process');
 var fs = require('fs');
 var http = require('https');
 var path = require('path');
@@ -157,7 +156,7 @@ function processCountryData(src, dest, cb) {
     function processLine(line) {
         var fields = CSVtoArray(line);
 
-        if (fields.length < 6) {
+        if (!fields || fields.length < 6) {
             console.log("weird line: %s::", line);
             return;
         }
